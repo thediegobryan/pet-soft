@@ -34,7 +34,7 @@ export default function PetContextProvider({
   const numberOfPets = pets.length;
   //Event Handlers
   const handleAddPet = async (newPet: Omit<Pet, "id">) => {
-    await addPet(newPet);
+    // await addPet(newPet);
     // setPets((prevPets) => [
     //   ...prevPets,
     //   { id: Date.now().toString(), ...newPet },
