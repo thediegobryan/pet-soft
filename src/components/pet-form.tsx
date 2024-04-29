@@ -3,11 +3,11 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Pet } from "@/lib/types";
-import { Button } from "@/components/ui/button";
 import { usePetContext } from "@/lib/hooks";
+import { addPet, editPet } from "@/actions/actions";
+import PetFormBtn from "./pet-form-btn";
+import { toast } from "sonner";
 import { act } from "react-dom/test-utils";
-import { addPet } from "@/actions/actions";
 
 type petFormProps = {
   actionType: "add" | "edit";
@@ -21,7 +21,25 @@ export default function PetForm({
   const { selectedPet } = usePetContext();
 
   return (
-    <form action={addPet} className="flex flex-col">
+    <form
+      action={async (formData) => {
+        if (actionType === "add") {
+          const error = await addPet(formData);
+          if (error) {
+            toast.error(error.message);
+            return;
+          }
+        } else if (actionType === "edit") {
+          const error = await editPet(selectedPet?.id, formData);
+          if (error) {
+            toast.error(error.message);
+            return;
+          }
+        }
+        onFormSubmission();
+      }}
+      className="flex flex-col"
+    >
       <div className="grid gap-1 py-1">
         <div className="grid grid-cols-4 items-center gap-2">
           <Label htmlFor="name" className="col-span-4">
@@ -81,9 +99,7 @@ export default function PetForm({
           />
         </div>
       </div>
-      <Button type="submit" className="self-end">
-        {actionType === "edit" ? "Edit pet" : "Add pet"}
-      </Button>
+      <PetFormBtn actionType={actionType} />
     </form>
   );
 }

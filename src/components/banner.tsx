@@ -6,7 +6,6 @@ export default function Banner() {
       <p className="font-extrabold">
         🚨 Auth has been turned off for easier project viewing 🚨
       </p>
-      <p className="font-extrabold">🚨 Persistance is off to save money 🚨</p>
     </section>
   );
 }
