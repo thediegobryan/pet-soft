@@ -42,14 +42,9 @@ export default function PetContextProvider({
     // ]);
   };
 
-  const handleEditPet = (editedPet: Pet) => {
-    setPets((prevPets) =>
-      prevPets.map((pet) => (pet.id === editedPet.id ? editedPet : pet))
-    );
-  };
+  const handleEditPet = (editedPet: Pet) => {};
 
   const handleCheckoutPet = (id: string) => {
-    setPets((prevPets) => prevPets.filter((pet) => pet.id !== id));
     setSelectedPetId(null);
   };
 
