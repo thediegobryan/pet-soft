@@ -4,7 +4,7 @@ export default function Banner() {
   return (
     <section className="bg-amber-400 text-center p-3">
       <p className="font-extrabold">
-        🚨 Auth has been turned off for easier project viewing 🚨
+        🚨 Auth & Persistance have been turned off for easier project viewing 🚨
       </p>
     </section>
   );
