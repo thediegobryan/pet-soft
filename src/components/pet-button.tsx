@@ -18,6 +18,7 @@ import PetForm from "./pet-form";
 import { usePetContext } from "@/lib/hooks";
 import { act } from "react-dom/test-utils";
 import { useState } from "react";
+import { flushSync } from "react-dom";
 
 type PetButtonProps = {
   actionType: "add" | "edit" | "checkout";
@@ -62,17 +63,10 @@ export default function PetButton({
               {actionType === "add" ? "Add a new pet" : "Edit pet"}
             </DialogTitle>
           </DialogHeader>
-          {actionType === "add" ? (
-            <PetForm
-              actionType="add"
-              onFormSubmission={() => setIsFormOpen(false)}
-            />
-          ) : (
-            <PetForm
-              actionType="edit"
-              onFormSubmission={() => setIsFormOpen(false)}
-            />
-          )}
+          <PetForm
+            actionType={actionType}
+            onFormSubmission={() => flushSync(() => setIsFormOpen(false))}
+          />
         </DialogContent>
       </Dialog>
     );

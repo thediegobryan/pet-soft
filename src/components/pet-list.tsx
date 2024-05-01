@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import React from "react";
-import { Pet } from "@/lib/types";
 import { usePetContext, useSearchContext } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 
